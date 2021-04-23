@@ -12,10 +12,37 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    fetch('https://reqres.in/api/users?page=1')
+  getContactData() {
+    fetch('https://reqres.in/api/users')
     .then(response => response.json())
-    .then(users => this.setState({ contacts: users.data }));
+    .then(
+      response => {
+        if (response.total_pages > 1) {
+          const apiPromises = [];
+          const totalPages = response.total_pages;
+
+          for (let i = totalPages; i > 0; i--) {
+            apiPromises.push(fetch('https://reqres.in/api/users?page=' + i));
+          }
+
+          Promise.all(apiPromises)
+          .then(responses => Promise.all(responses.map(response => response.json())))
+          .then(responses => {
+            const contacts = [];
+
+            responses.forEach(response => contacts.push(response.data))
+            console.log(contacts)
+            this.setState({ contacts: contacts.flat() })
+          });
+        } else {
+          this.setState({ contacts: response.data })
+        }
+      }
+    );
+  }
+
+  componentDidMount() {
+    this.getContactData();
   }
 
   render() {
