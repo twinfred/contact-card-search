@@ -17,19 +17,19 @@ class App extends Component {
     .then(response => response.json())
     .then(
       response => {
+        const contacts = [];
+        contacts.push(response.data);
         if (response.total_pages > 1) {
           const apiPromises = [];
           const totalPages = response.total_pages;
 
-          for (let i = totalPages; i > 0; i--) {
+          for (let i = totalPages; i > 1; i--) {
             apiPromises.push(fetch('https://reqres.in/api/users?page=' + i));
           }
 
           Promise.all(apiPromises)
           .then(responses => Promise.all(responses.map(response => response.json())))
           .then(responses => {
-            const contacts = [];
-
             responses.forEach(response => contacts.push(response.data))
             console.log(contacts)
             this.setState({ contacts: contacts.flat() })
