@@ -12,8 +12,6 @@ class App extends Component {
       contacts: [],
       searchValue: '',
     }
-
-    this.filterContacts = this.filterContacts.bind(this);
   }
 
   getContactData() {
@@ -48,7 +46,7 @@ class App extends Component {
     this.getContactData();
   }
 
-  filterContacts(event) {
+  filterContacts = (event) => {
     this.setState({ searchValue: event.target.value });
   }
 
