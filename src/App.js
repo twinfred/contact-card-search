@@ -2,14 +2,18 @@ import './App.css';
 import { Component } from 'react';
 
 import { CardList } from './components/card-list/card-list.component'
+import { SearchBox } from './components/search-box/search-box.component';
 
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      contacts: []
+      contacts: [],
+      searchValue: '',
     }
+
+    this.filterContacts = this.filterContacts.bind(this);
   }
 
   getContactData() {
@@ -31,7 +35,6 @@ class App extends Component {
           .then(responses => Promise.all(responses.map(response => response.json())))
           .then(responses => {
             responses.forEach(response => contacts.push(response.data))
-            console.log(contacts)
             this.setState({ contacts: contacts.flat() })
           });
         } else {
@@ -45,10 +48,21 @@ class App extends Component {
     this.getContactData();
   }
 
+  filterContacts(event) {
+    this.setState({ searchValue: event.target.value });
+  }
+
   render() {
+    const { contacts, searchValue } = this.state;
+    const filteredContacts = contacts.filter(contact =>
+      contact.first_name.toLowerCase().includes(searchValue.toLowerCase())
+      || contact.last_name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
     return (
       <div className="App">
-        <CardList contacts={this.state.contacts}/>       
+        <SearchBox label="Search Contacts" filterContacts={this.filterContacts} />
+        <CardList contacts={filteredContacts}/>
       </div>
     );
   }

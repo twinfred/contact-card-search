@@ -9,6 +9,7 @@
   width: 200px;
   transform: translate(0);
   transition: transform 0.25s ease-out;
+  text-align: center;
 }
 
 .card-container:hover {
