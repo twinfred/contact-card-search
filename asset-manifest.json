@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/contact-card-search/static/css/main.bad99892.chunk.css",
+    "main.js": "/contact-card-search/static/js/main.bf700889.chunk.js",
+    "main.js.map": "/contact-card-search/static/js/main.bf700889.chunk.js.map",
+    "runtime-main.js": "/contact-card-search/static/js/runtime-main.4b5fbfe2.js",
+    "runtime-main.js.map": "/contact-card-search/static/js/runtime-main.4b5fbfe2.js.map",
+    "static/js/2.0d65062c.chunk.js": "/contact-card-search/static/js/2.0d65062c.chunk.js",
+    "static/js/2.0d65062c.chunk.js.map": "/contact-card-search/static/js/2.0d65062c.chunk.js.map",
+    "static/js/3.52563716.chunk.js": "/contact-card-search/static/js/3.52563716.chunk.js",
+    "static/js/3.52563716.chunk.js.map": "/contact-card-search/static/js/3.52563716.chunk.js.map",
+    "index.html": "/contact-card-search/index.html",
+    "static/css/main.bad99892.chunk.css.map": "/contact-card-search/static/css/main.bad99892.chunk.css.map",
+    "static/js/2.0d65062c.chunk.js.LICENSE.txt": "/contact-card-search/static/js/2.0d65062c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4b5fbfe2.js",
+    "static/js/2.0d65062c.chunk.js",
+    "static/css/main.bad99892.chunk.css",
+    "static/js/main.bf700889.chunk.js"
+  ]
+}
