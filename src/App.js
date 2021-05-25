@@ -19,7 +19,7 @@ class App extends Component {
     .then(response => response.json())
     .then(
       response => {
-        const contacts = [];
+        let contacts = [];
         contacts.push(response.data);
         if (response.total_pages > 1) {
           const apiPromises = [];
@@ -32,11 +32,27 @@ class App extends Component {
           Promise.all(apiPromises)
           .then(responses => Promise.all(responses.map(response => response.json())))
           .then(responses => {
-            responses.forEach(response => contacts.push(response.data))
-            this.setState({ contacts: contacts.flat() })
+            responses.forEach(response => contacts.push(response.data));
+
+            contacts = contacts.flat().sort((firstItem, secondItem) => {
+              const firstItemName = [firstItem.first_name.toLowerCase(), firstItem.last_name.toLowerCase()].join(' ');
+              const secondItemName = [secondItem.first_name.toLowerCase(), secondItem.last_name.toLowerCase()].join(' ');
+
+              if (firstItemName < secondItemName) {
+                return - 1;
+              }
+
+              if (firstItemName > secondItemName) {
+                return 1;
+              }
+
+              return 0;
+            });
+
+            this.setState({ contacts });
           });
         } else {
-          this.setState({ contacts: response.data })
+          this.setState({ contacts: response.data });
         }
       }
     );
