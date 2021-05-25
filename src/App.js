@@ -69,8 +69,7 @@ class App extends Component {
   render() {
     const { contacts, searchValue } = this.state;
     const filteredContacts = contacts.filter(contact =>
-      contact.first_name.toLowerCase().includes(searchValue.toLowerCase())
-      || contact.last_name.toLowerCase().includes(searchValue.toLowerCase())
+      [contact.first_name, contact.last_name].join(' ').toLowerCase().includes(searchValue.toLowerCase())
     );
 
     return (
